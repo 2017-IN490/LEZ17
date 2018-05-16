@@ -59,32 +59,12 @@ public	boolean testloop(Token factortoken) {
 		
 		//genera candidati finche' non trovo la combinazione
 		//di righe nulla
-		while (testloop(factoringtoken)) {
+		while (testloop(factoringtoken)) factoringtoken = (Token) this.next().get() ;
+		
+		System.out.println("in Q:S:mailoop after while : ready to new S:get()")
+		token = this.next().get() ;
 			
-			factoringtoken = (Token) this.next().get() ;
-			
-		}
-		
-		
-		// testloop nel caso di primality false controlla se il residuo del token e' 1
-		//  se non e' uno allora genero nuovi filtri = set primality a true 
-//while rango della matrice minore numero di righe		
-		
-		//se il residuo del token = 1 allora aggiungo la riga 
-		// e faccio un nuovo get (sempre con primality a false)
-		
-		// altrimenti se il residuo del token non e' 1
-			// setprimality(true)
-		
-
-		
-			
-			
-			System.out.println("in Q:S:mailoop after while : ready to new S:get()");
-			token = this.next().get() ;
-			
-			System.out.println("in Q:S:mailoop new integer : "+token.value2()+" "+token.value());
-		};
+		System.out.println("in Q:S:mailoop new integer : "+token.value2()+" "+token.value());
 		
 	}
 	
