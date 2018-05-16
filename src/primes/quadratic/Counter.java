@@ -6,9 +6,11 @@ import java.math.BigInteger ;
 public class Counter extends primes.Counter<Token> {
 private	BigInteger factoring ; 
 private BigInteger root ;
+private Token ftok ;
 
 public Counter() {
 		super(new Token());
+		this.ftok = new Token();
 	}
 
 BigInteger squareroot ( BigInteger x) {
@@ -39,7 +41,7 @@ public 	Token token() {
 
 
 public Token get() {
-	if (this.token().primality())
+	if (Sieve.mode)
 		  {
 			this.token().Reset(this.value(), this.value());
 			this.set() ;

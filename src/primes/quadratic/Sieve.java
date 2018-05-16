@@ -6,12 +6,14 @@ import primes.Item;
 //import primes.erathostenes.Token;
 public class Sieve extends primes.Sieve<Token> {
  BigInteger factoring ;
+ static boolean mode ;
 
 /**
  * In the extension of a class constructors arenot inherited
  */
 public	Sieve (String[] args) {
 		super(args, new Counter(new BigInteger(args[1]) )) ;
+		this.mode = false ; // factoring mode
 		this.factoring = ((Counter)this.next()).factoring();
 		System.out.println("constructing quadratic Sieve");
 	
@@ -21,45 +23,26 @@ public	Sieve (String[] args) {
 
 	
 	
-public	boolean testloop(Token token) {
-	BigInteger safenum,candidate,residue ;
-	Token ptoken ;
+public	boolean testloop(Token factortoken) {
+	//BigInteger safenum,candidate,residue ;
+	Token primetoken ;
 	
-		System.out.println("token in testloop:\n residue :"+token.value()+" intero: "+token.value2());
+	System.out.println("factoring token in testloop:\n residue :"+factortoken.value()+" intero: "+factortoken.value2());
 	
-	if (token.testincompletefactoring())
+	while (factortoken.testincompletefactoring())
 	{
 		// passo in modalita generazione
-		token.SetPrimality(true);
-		ptoken = this.next().get();
-		while(token.value().compareTo(BigInteger.ONE)!=0)
-		{
-			this.seteuler() ;
-			this.set( new Filter(this.next() , ptoken.value(),token));
-		}
+		Sieve.mode= true ; // generating mode
+		primetoken.SetPrimality(Sieve.mode);
+		primetoken = this.next().get();
 		
+		this.seteuler() ;
+		this.set( new Filter(this.next() , primetoken.value(),factortoken));	
 	}
 	
-	while (testloop(token)) {
-		if (token.primality()) {
-			this.seteuler() ;
-			this.set( new Filter(this.next() , token.value() ));
-		}
-		else
-		{
-			// creare oggetto ROW che memorizza il candidato
-			
-		};
-
-	
-/*
- public	boolean testloop(Token token) {
-	System.out.println("token in testloop:\n residue :"+token.value()+" intero: "+token.value2());
-	
-	return ( token.value2().compareTo(this.getmax()) != 1) ;
+	Sieve.mode = false;
+	return ((Matrix)(((Filter)this.next()).column()).quadratictest());
 }
- */
-	
 	
 /**
  * @override of the erathosenes.Sieve mainloop
@@ -67,18 +50,18 @@ public	boolean testloop(Token token) {
  * the primality boolean in order to create a new Filter objet
  */
 	public void mainloop() {
-		Token token ;
+		Token factoringtoken ;
 		
 		
-		token.SetPrimality(false);
-		token = (Token) this.next().get() ;
+		factoring.SetPrimality(Sieve.mode);
+		factoringtoken = (Token) this.next().get() ;
 		System.out.println("in Q:S:mailoop before while "+token.value2());
 		
 		//genera candidati finche' non trovo la combinazione
 		//di righe nulla
-		while (testloop(token)) {
+		while (testloop(factoringtoken)) {
 			
-			token = (Token) this.next().get() ;
+			factoringtoken = (Token) this.next().get() ;
 			
 		}
 		

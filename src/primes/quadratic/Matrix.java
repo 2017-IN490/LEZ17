@@ -6,6 +6,8 @@
 package primes.quadratic ;
 
 import java.math.BigInteger ;
+import java.util.Map;
+
 import primes.Item ;
 import primes.Bidimensional ;
 //import primes.erathostenes.Token ;
@@ -13,6 +15,8 @@ import primes.Bidimensional ;
 class Matrix extends Item<Token> implements Bidimensional<Token> {
 private	BigInteger entry ;
 private	Item<Token> nextrow ;
+private BigInteger rowparity ;
+Map<BigInteger,BigInteger> mappa ;
 
 /** Costruttore che inserisce un nuovo elemento <em>e</em>
        nella matrice  che continua con la riga n
@@ -81,5 +85,11 @@ public Item<Token> column () {
 	return this.nextrow ;
 	}
 
+public boolean quadratictest() {
+
+	
+	for(x in mappa) mappa.add(x.key() + 2^(k+1) , x.value().xor(this.rowparity)  )
+	
+}
 
 }

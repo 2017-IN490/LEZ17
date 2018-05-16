@@ -53,4 +53,10 @@ class Token extends primes.erathostenes.Token {
 	boolean primality() {
 		return this.primality;
 	}
+	
+	boolean testincompletefactoring() {
+		
+		return (this.value().compareTo(BigInteger.ONE)!=0) ;
+		
+	}
 }
