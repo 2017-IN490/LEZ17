@@ -1,7 +1,7 @@
 package primes.quadratic ;
 import java.math.BigInteger;
 
-import primes.Item;
+//import primes.Item;
 //import primes.Bidimensional ;
 //import primes.erathostenes.Token;
 public class Sieve extends primes.Sieve<Token> {
@@ -13,7 +13,7 @@ public class Sieve extends primes.Sieve<Token> {
  */
 public	Sieve (String[] args) {
 		super(args, new Counter(new BigInteger(args[1]) )) ;
-		this.mode = false ; // factoring mode
+		Sieve.mode = false ; // factoring mode
 		this.factoring = ((Counter)this.next()).factoring();
 		System.out.println("constructing quadratic Sieve");
 	
@@ -33,7 +33,7 @@ public	boolean testloop(Token factortoken) {
 	{
 		// passo in modalita generazione
 		Sieve.mode= true ; // generating mode
-		primetoken.SetPrimality(Sieve.mode);
+//		primetoken.SetPrimality(Sieve.mode);
 		primetoken = this.next().get();
 		
 		this.seteuler() ;
@@ -41,7 +41,7 @@ public	boolean testloop(Token factortoken) {
 	}
 	
 	Sieve.mode = false;
-	return ((Matrix)(((Filter)this.next()).column()).quadratictest());
+	return ((Matrix)((Filter)this.next()).column()).quadratictest();
 }
 	
 /**
@@ -53,18 +53,33 @@ public	boolean testloop(Token factortoken) {
 		Token factoringtoken ;
 		
 		
-		factoring.SetPrimality(Sieve.mode);
+//		factoringtoken.SetPrimality(Sieve.mode);
 		factoringtoken = (Token) this.next().get() ;
-		System.out.println("in Q:S:mailoop before while "+token.value2());
+		System.out.println("in Q:S:mailoop before while "+factoringtoken.value2());
 		
 		//genera candidati finche' non trovo la combinazione
 		//di righe nulla
-		while (testloop(factoringtoken)) factoringtoken = (Token) this.next().get() ;
-		
-		System.out.println("in Q:S:mailoop after while : ready to new S:get()")
-		token = this.next().get() ;
+		while (testloop(factoringtoken)) {
 			
-		System.out.println("in Q:S:mailoop new integer : "+token.value2()+" "+token.value());
+			factoringtoken = (Token) this.next().get() ;
+			
+		}
+		
+		
+		// testloop nel caso di primality false controlla se il residuo del token e' 1
+		//  se non e' uno allora genero nuovi filtri = set primality a true 
+//while rango della matrice minore numero di righe		
+		
+		//se il residuo del token = 1 allora aggiungo la riga 
+		// e faccio un nuovo get (sempre con primality a false)
+		
+		// altrimenti se il residuo del token non e' 1
+			// setprimality(true)
+		
+		System.out.println("in Q:S:mailoop after while : ready to new S:get()");
+		factoringtoken = this.next().get() ;
+			
+		System.out.println("in Q:S:mailoop new integer : "+factoringtoken.value2()+" "+factoringtoken.value());
 		
 	}
 	

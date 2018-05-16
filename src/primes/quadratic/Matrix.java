@@ -6,7 +6,8 @@
 package primes.quadratic ;
 
 import java.math.BigInteger ;
-import java.util.Map;
+import java.util.HashMap;
+import java.util.Map.Entry;
 
 import primes.Item ;
 import primes.Bidimensional ;
@@ -16,7 +17,7 @@ class Matrix extends Item<Token> implements Bidimensional<Token> {
 private	BigInteger entry ;
 private	Item<Token> nextrow ;
 private BigInteger rowparity ;
-HashMap<BigInteger,BigInteger> mappa = new HashMap<BigInteger,BigInteger>();
+private HashMap<BigInteger,BigInteger> mappa = new HashMap<BigInteger,BigInteger>();
 
 /** Costruttore che inserisce un nuovo elemento <em>e</em>
        nella matrice  che continua con la riga n
@@ -60,7 +61,7 @@ public Token get() {
 		if (this.column() == null)
 				return 1 ;
 			else
-				return this.column().rows()+1 ;
+				return ((Matrix)this.column()).rows()+1 ;
 		
 	}
 	
@@ -98,7 +99,11 @@ public Item<Token> column () {
 	}
 
 public boolean quadratictest() {
-	for(x : mappa) mappa.add(x.key().add(Token.TWO.pow(this.rows())) , x.value().xor(this.rowparity)  ) ;
+	
+	for(Entry<BigInteger, BigInteger> x : this.mappa.entrySet()) this.mappa.put(x.getKey().add(Token.TWO.pow(this.rows())) , x.getValue().xor(this.rowparity)  ) ;
+
+//	mappa.forEach((k, v) -> { mappa.put(k.add(Token.TWO.pow(this.rows())) , v.xor(this.rowparity)  );
+	
 	return (mappa.containsValue(BigInteger.ZERO));
 }
 
