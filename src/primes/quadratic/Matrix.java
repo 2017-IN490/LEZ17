@@ -16,7 +16,7 @@ class Matrix extends Item<Token> implements Bidimensional<Token> {
 private	BigInteger entry ;
 private	Item<Token> nextrow ;
 private BigInteger rowparity ;
-Map<BigInteger,BigInteger> mappa ;
+HashMap<BigInteger,BigInteger> mappa = new HashMap<BigInteger,BigInteger>();
 
 /** Costruttore che inserisce un nuovo elemento <em>e</em>
        nella matrice  che continua con la riga n
@@ -86,9 +86,7 @@ public Item<Token> column () {
 	}
 
 public boolean quadratictest() {
-
-	
-	for(x in mappa) mappa.add(x.key() + 2^(k+1) , x.value().xor(this.rowparity)  )
+	for(x : mappa) mappa.add(x.key() + 2^(k+1) , x.value().xor(this.rowparity)  )
 	
 }
 
