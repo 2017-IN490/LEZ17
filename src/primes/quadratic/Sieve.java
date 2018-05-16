@@ -9,11 +9,11 @@ public class Sieve extends primes.Sieve<Token> {
  static boolean mode ;
 
 /**
- * In the extension of a class constructors arenot inherited
+ * In the extension of a class constructors are not inherited
  */
 public	Sieve (String[] args) {
 		super(args, new Counter(new BigInteger(args[1]) )) ;
-		this.mode = false ; // factoring mode
+		Sieve.mode = false ; // factoring mode
 		this.factoring = ((Counter)this.next()).factoring();
 		System.out.println("constructing quadratic Sieve");
 	
@@ -32,7 +32,7 @@ public	boolean testloop(Token factortoken) {
 	while (factortoken.testincompletefactoring())
 	{
 		// passo in modalita generazione
-		Sieve.mode= true ; // generating mode
+		Sieve.mode = true ; // generating mode
 		primetoken.SetPrimality(Sieve.mode);
 		primetoken = this.next().get();
 		
@@ -65,27 +65,10 @@ public	boolean testloop(Token factortoken) {
 			
 		}
 		
-		
-		// testloop nel caso di primality false controlla se il residuo del token e' 1
-		//  se non e' uno allora genero nuovi filtri = set primality a true 
-//while rango della matrice minore numero di righe		
-		
-		//se il residuo del token = 1 allora aggiungo la riga 
-		// e faccio un nuovo get (sempre con primality a false)
-		
-		// altrimenti se il residuo del token non e' 1
-			// setprimality(true)
-		
-
-		
+		System.out.println("in Q:S:mailoop after while : ready to new S:get()");
+		token = this.next().get() ;
 			
-			
-			System.out.println("in Q:S:mailoop after while : ready to new S:get()");
-			token = this.next().get() ;
-			
-			System.out.println("in Q:S:mailoop new integer : "+token.value2()+" "+token.value());
-		};
-		
+		System.out.println("in Q:S:mailoop new integer : "+token.value2()+" "+token.value());
 	}
 	
 	public void printmatrix() {
