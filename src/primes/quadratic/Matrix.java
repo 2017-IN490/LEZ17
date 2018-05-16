@@ -52,6 +52,18 @@ public Token get() {
 	return null ;
 }
 
+/** implementazione del metodo che restituisce
+ *  il numero di righe della sotto-matrice
+ *  individuata dall'elemento corrente
+ */
+	public int rows() {
+		if (this.column() == null)
+				return 1 ;
+			else
+				return this.column().rows()+1 ;
+		
+	}
+	
 /** implementazione del metodo value() ereditato
 	@return restituisce il BigInteger dell'elemento della matrice
 */
@@ -86,8 +98,8 @@ public Item<Token> column () {
 	}
 
 public boolean quadratictest() {
-	for(x : mappa) mappa.add(x.key() + 2^(k+1) , x.value().xor(this.rowparity)  )
-	
+	for(x : mappa) mappa.add(x.key().add(Token.TWO.pow(this.rows())) , x.value().xor(this.rowparity)  ) ;
+	return (mappa.containsValue(BigInteger.ZERO));
 }
 
 }
